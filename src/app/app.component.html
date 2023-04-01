@@ -1,0 +1,26 @@
+<div class="max-w-2xl container mx-auto pt-5 mt-[50px] ">
+  <h1 class="font-bold md-2 text-center">
+    {{title | titlecase}}
+  </h1>
+
+  <div>
+    <select name="noOfRows" (change)="onTableSizeChange($event)">
+      <option *ngFor="let size of tableSize"  [selected]="size === 2">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+
+  <app-codeValue *ngFor="let codeValue of codeValues  | paginate
+              : pagingConfig;"
+                 [codeValue]="codeValue">
+  </app-codeValue>
+
+  <div>
+    <pagination-controls previousLabel="Prev"
+                         nextLabel="Next"
+                         (pageChange)="onPageChange($event)">
+    </pagination-controls>
+  </div>
+</div>
+
