@@ -14,14 +14,20 @@ export class CodeValueService {
   }
 
   codeValue: ICodeValue[] = []
-
-  getAll(): Observable<ICodeValue[]> {
-    return this.http.get<ICodeValue[]>("http://localhost:5285/api/Data" ).pipe(
-      delay(200),
-      retry(2),
-      tap(codeValues => this.codeValue = codeValues),
-      catchError(this.errorHandler.bind(this))
-    )
+  getAll(): Observable<ICodeValue[]>;
+  getAll(filter: string | undefined): Observable<ICodeValue[]>;
+  getAll(filter?: string | undefined): Observable<ICodeValue[]> {
+    return this.http.get<ICodeValue[]>("http://localhost:5285/api/Data", filter ? {
+      params: new HttpParams({
+        fromObject: { value: filter }
+      })
+    } : undefined)
+      .pipe(
+        delay(200),
+        retry(2),
+        tap(codeValues => this.codeValue = codeValues),
+        catchError(this.errorHandler.bind(this))
+      )
   }
 
   private errorHandler(error: HttpErrorResponse) {

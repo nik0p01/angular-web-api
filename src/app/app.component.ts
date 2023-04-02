@@ -20,6 +20,8 @@ export class AppComponent implements OnInit, PagingConfig {
   title = 'angular web api';
   codeValues: ICodeValue[];
 
+  filter = '';
+
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalItems: number = 0;
@@ -32,17 +34,17 @@ export class AppComponent implements OnInit, PagingConfig {
 
   pagingConfig: PagingConfig = {} as PagingConfig;
 
-
-
-  fetch(): void {
-    this.codeValueService.getAll().subscribe(
+  fetch(): void;
+  fetch(filter: string): void;
+  fetch(filter?: string): void {
+    this.codeValueService.getAll(filter).subscribe(
       (response) => {
         this.codeValues = response;
         this.pagingConfig.totalItems = response.length;
         console.log(response);
       },
       (error) => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -56,4 +58,7 @@ export class AppComponent implements OnInit, PagingConfig {
     this.pagingConfig.currentPage = 1;
   }
 
+  onFilterChange(filter: string) {
+    this.fetch(filter);
+  }
 }
