@@ -1,27 +1,31 @@
-# AngularWebApi
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Тестовое задание 1
+Необходимо реализовать веб-приложение на Asp.Net Core.
+Серверная часть
+Разработать 2 метода API по технологии REST.
+1 метод
+Получает на вход json, который содержит массив объектов, и сохраняет его в БД. 
+Описание объекта:
+⦁	code – код. Тип int.
+⦁	value – значение. Тип string.
+Пример json:
+[
+	{“1”: “value1”},
+	{“5”: “value2”},
+{“10”: “value32”},
+….
+]
+Полученный массив необходимо отсортировать по полю code и сохранить в БД (в решении необходимо описать структуру таблицы). 
+В таблице должно быть 3 поля:
+⦁	порядковый номер
+⦁	код
+⦁	значение
+Перед сохранением данных таблицу необходимо очистить.
+2 метод
+Возвращает данные клиенту из таблицы в виде json. 
+Возвращаемые данные:
+⦁	порядковый номер
+⦁	код
+⦁	значение
+Добавить возможность фильтрации возвращаемых данных.
+Клиентская часть
+Сделать загрузку и отображение списка используя описанные выше методы. Вывод данных в таблицу с использованием пагинации приветствуется.
